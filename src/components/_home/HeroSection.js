@@ -3,7 +3,7 @@
 
 
 // import React, { useState, useEffect } from "react";
-// import { Box, Typography, Button } from "@mui/material";
+// import { Box, Typography } from "@mui/material";
 // import SwipeableViews from "react-swipeable-views"; // You can install this package if needed
 
 // function HeroSection() {
@@ -85,7 +85,7 @@
 //               alt={slide.alt}
 //             />
 
-//             {/* Text Content - Hidden on small screens */}
+//             {/* Text Content */}
 //             <Box
 //               sx={{
 //                 position: "absolute",
@@ -98,34 +98,34 @@
 //                 backgroundColor: "rgba(211, 211, 211, 0.9)",
 //                 borderRadius: "10px",
 //                 textAlign: "center",
-//                 display: { xs: "none", md: "flex" }, // Hide on small screens
+//                 display: "flex", // Ensure it's always displayed on all screens
+//                 flexDirection: "column",
+//                 justifyContent: "center",
 //               }}
 //             >
-//               <div>
-//                 <Typography
-//                   variant="h5"
-//                   sx={{
-//                     fontSize: "1.2rem",
-//                     fontWeight: { xs: "500", sm: "bold" },
-//                     color: "#fff",
-//                     textTransform: "uppercase",
-//                     marginBottom: "10px",
-//                   }}
-//                 >
-//                   {slide.subtitle}
-//                 </Typography>
-//                 <Typography
-//                   variant="h3"
-//                   sx={{
-//                     fontSize: "2rem",
-//                     fontWeight: { xs: "600", sm: "700" },
-//                     color: "#fff",
-//                     textShadow: "2px 2px 4px rgba(0, 0, 0, 0.6)",
-//                   }}
-//                 >
-//                   {slide.title}
-//                 </Typography>
-//               </div>
+//               <Typography
+//                 variant="h5"
+//                 sx={{
+//                   fontSize: { xs: "1rem", sm: "1.2rem" }, // Smaller font size on xs
+//                   fontWeight: { xs: "500", sm: "bold" },
+//                   color: "#fff",
+//                   textTransform: "uppercase",
+//                   marginBottom: "10px",
+//                 }}
+//               >
+//                 {slide.subtitle}
+//               </Typography>
+//               <Typography
+//                 variant="h3"
+//                 sx={{
+//                   fontSize: { xs: "1.5rem", sm: "2rem" }, // Adjust font size for small screens
+//                   fontWeight: { xs: "600", sm: "700" },
+//                   color: "#fff",
+//                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.6)",
+//                 }}
+//               >
+//                 {slide.title}
+//               </Typography>
 //             </Box>
 //           </Box>
 //         ))}
@@ -140,7 +140,6 @@
 
 import React, { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
-import SwipeableViews from "react-swipeable-views"; // You can install this package if needed
 
 function HeroSection() {
   const videos = [
@@ -172,7 +171,7 @@ function HeroSection() {
 
   const [activeIndex, setActiveIndex] = useState(0); // To control carousel index
 
-  // Change slide every 3 seconds (1000ms interval)
+  // Change slide every 3 seconds (3000ms interval)
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prevIndex) => (prevIndex + 1) % videos.length);
@@ -192,80 +191,80 @@ function HeroSection() {
         padding: "0",
       }}
     >
-      {/* Swipeable Views for carousel */}
-      <SwipeableViews index={activeIndex} onChangeIndex={setActiveIndex}>
-        {videos.map((slide, index) => (
-          <Box
-            key={index}
-            sx={{
-              position: "relative",
+      {/* Custom carousel without Swipeable Views */}
+      {videos.map((slide, index) => (
+        <Box
+          key={index}
+          sx={{
+            position: "absolute",
+            width: "100%",
+            height: "100vh",
+            overflow: "hidden",
+            opacity: activeIndex === index ? 1 : 0, // Show only active slide
+            transition: "opacity 1s ease", // Smooth transition
+          }}
+        >
+          {/* Video background */}
+          <video
+            src={slide.url}
+            autoPlay
+            loop
+            muted
+            style={{
+              position: "absolute",
+              top: "0",
+              left: "0",
               width: "100%",
-              height: "100vh",
-              overflow: "hidden",
+              height: "100%",
+              objectFit: "cover",
+            }}
+            alt={slide.alt}
+          />
+
+          {/* Text Content */}
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "80%", // Maintain consistent width to cover watermark
+              maxWidth: "800px", // Limit maximum width for larger screens
+              padding: "20px 40px",
+              backgroundColor: "rgba(211, 211, 211, 0.9)",
+              borderRadius: "10px",
+              textAlign: "center",
+              display: "flex", // Ensure it's always displayed on all screens
+              flexDirection: "column",
+              justifyContent: "center",
             }}
           >
-            {/* Video background */}
-            <video
-              src={slide.url}
-              autoPlay
-              loop
-              muted
-              style={{
-                position: "absolute",
-                top: "0",
-                left: "0",
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-              }}
-              alt={slide.alt}
-            />
-
-            {/* Text Content */}
-            <Box
+            <Typography
+              variant="h5"
               sx={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                width: "80%", // Maintain consistent width to cover watermark
-                maxWidth: "800px", // Limit maximum width for larger screens
-                padding: "20px 40px",
-                backgroundColor: "rgba(211, 211, 211, 0.9)",
-                borderRadius: "10px",
-                textAlign: "center",
-                display: "flex", // Ensure it's always displayed on all screens
-                flexDirection: "column",
-                justifyContent: "center",
+                fontSize: { xs: "1rem", sm: "1.2rem" }, // Smaller font size on xs
+                fontWeight: { xs: "500", sm: "bold" },
+                color: "#fff",
+                textTransform: "uppercase",
+                marginBottom: "10px",
               }}
             >
-              <Typography
-                variant="h5"
-                sx={{
-                  fontSize: { xs: "1rem", sm: "1.2rem" }, // Smaller font size on xs
-                  fontWeight: { xs: "500", sm: "bold" },
-                  color: "#fff",
-                  textTransform: "uppercase",
-                  marginBottom: "10px",
-                }}
-              >
-                {slide.subtitle}
-              </Typography>
-              <Typography
-                variant="h3"
-                sx={{
-                  fontSize: { xs: "1.5rem", sm: "2rem" }, // Adjust font size for small screens
-                  fontWeight: { xs: "600", sm: "700" },
-                  color: "#fff",
-                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.6)",
-                }}
-              >
-                {slide.title}
-              </Typography>
-            </Box>
+              {slide.subtitle}
+            </Typography>
+            <Typography
+              variant="h3"
+              sx={{
+                fontSize: { xs: "1.5rem", sm: "2rem" }, // Adjust font size for small screens
+                fontWeight: { xs: "600", sm: "700" },
+                color: "#fff",
+                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.6)",
+              }}
+            >
+              {slide.title}
+            </Typography>
           </Box>
-        ))}
-      </SwipeableViews>
+        </Box>
+      ))}
     </Box>
   );
 }
