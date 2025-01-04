@@ -109,13 +109,13 @@ const VerifyOtp = () => {
               padding: "10px",
               fontSize: "16px",
               color: "#fff",
-              backgroundColor: "#26a69a",
+              backgroundColor: "rgb(96, 63, 131)",
               border: "none",
               borderRadius: "4px",
               cursor: "pointer",
             }}
-            onMouseEnter={(e) => (e.target.style.backgroundColor = "#00796b")}
-            onMouseLeave={(e) => (e.target.style.backgroundColor = "#26a69a")}
+            onMouseEnter={(e) => (e.target.style.backgroundColor = "rgb(96, 63, 131)")}
+            onMouseLeave={(e) => (e.target.style.backgroundColor = "rgb(96, 63, 131)")}
           >
             Verify
           </button>
