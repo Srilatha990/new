@@ -154,9 +154,8 @@ function Footer() {
               </Typography>
               <Typography variant="body1" sx={{ color: '#ADBBDA', marginBottom: '20px' }}>
                 Architecture<br />
-                8-3-960/3/1<br />
-                Srinagar colony, Near Axis Bank<br />
-                Hyderabad -500074
+                USA, UK
+               
               </Typography>
 
               <Box sx={{ display: 'flex', gap: 2 }}>
